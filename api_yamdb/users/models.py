@@ -6,4 +6,4 @@ from django.db import models
 
 class CustomUser(AbstractUser):
     """Кастомная модель пользователя."""
-    username = models.CharField(max_length=50, unique=True, verbose_name='username')
+    pass
