@@ -21,11 +21,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD
-=======
     'api.apps.ApiConfig',
     'reviews.apps.ReviewsConfig',
->>>>>>> main
     'users.apps.UsersConfig',
 ]
 
@@ -108,10 +105,6 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = ((BASE_DIR / 'static/'),)
 
-<<<<<<< HEAD
-
-=======
->>>>>>> main
 # Active User Model
 
 AUTH_USER_MODEL = 'users.CustomUser'
