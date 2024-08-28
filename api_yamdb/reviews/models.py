@@ -1,10 +1,13 @@
+from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils import timezone
 
-from users.models import CustomUser
-from .constants import NAME_LENGTH, SLAG_LENGTH
+from .constants import NAME_LENGTH, SLUG_LENGTH
+
+
+User = get_user_model()
 
 
 class Category(models.Model):
@@ -13,7 +16,7 @@ class Category(models.Model):
         verbose_name='Название'
     )
     slug = models.SlugField(
-        max_length=SLAG_LENGTH,
+        max_length=SLUG_LENGTH,
         unique=True,
         verbose_name='Слаг'
     )
@@ -33,7 +36,7 @@ class Genre(models.Model):
         verbose_name='Название'
     )
     slug = models.SlugField(
-        max_length=SLAG_LENGTH,
+        max_length=SLUG_LENGTH,
         unique=True,
         verbose_name='Слаг'
     )
@@ -102,7 +105,7 @@ class Review(models.Model):
         verbose_name='Текст'
     )
     author = models.ForeignKey(
-        CustomUser,
+        User,
         on_delete=models.CASCADE,
         verbose_name='Автор'
     )
@@ -140,7 +143,7 @@ class Comment(models.Model):
         verbose_name='Текст'
     )
     author = models.ForeignKey(
-        CustomUser,
+        User,
         on_delete=models.CASCADE,
         verbose_name='Автор'
     )
