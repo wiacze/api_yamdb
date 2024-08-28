@@ -13,12 +13,14 @@ User = get_user_model()
 class Category(models.Model):
     name = models.CharField(
         max_length=NAME_LENGTH,
-        verbose_name='Название'
+        verbose_name='Название категории',
     )
     slug = models.SlugField(
         max_length=SLUG_LENGTH,
         unique=True,
-        verbose_name='Слаг'
+        verbose_name='Идентификатор категории',
+        help_text=('Идентификатор страницы для URL; разрешены символы '
+                   'латиницы, цифры, дефис и подчёркивание.'),
     )
 
     class Meta:
@@ -33,12 +35,14 @@ class Category(models.Model):
 class Genre(models.Model):
     name = models.CharField(
         max_length=NAME_LENGTH,
-        verbose_name='Название'
+        verbose_name='Название жанра',
     )
     slug = models.SlugField(
         max_length=SLUG_LENGTH,
         unique=True,
-        verbose_name='Слаг'
+        verbose_name='Идентификатор жанра',
+        help_text=('Идентификатор страницы для URL; разрешены символы '
+                   'латиницы, цифры, дефис и подчёркивание.'),
     )
 
     class Meta:
@@ -53,14 +57,14 @@ class Genre(models.Model):
 class Title(models.Model):
     name = models.CharField(
         max_length=NAME_LENGTH,
-        verbose_name='Название'
+        verbose_name='Название произведения',
     )
     year = models.IntegerField(
-        verbose_name='Год выхода'
+        verbose_name='Год выпуска'
     )
     description = models.TextField(
         blank=True,
-        verbose_name='Описание'
+        verbose_name='Описание произведения',
     )
     category = models.ForeignKey(
         Category,
@@ -72,7 +76,7 @@ class Title(models.Model):
     genre = models.ManyToManyField(
         Genre,
         related_name='titles',
-        verbose_name='Жанр'
+        verbose_name='Жанры'
     )
 
     def clean(self):
