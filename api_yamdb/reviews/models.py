@@ -1,4 +1,6 @@
+from django.core.exceptions import ValidationError
 from django.db import models
+from datetime import datetime
 
 
 class Category(models.Model):
@@ -50,15 +52,35 @@ class Title(models.Model):
         max_length=256
     )
     description = models.TextField(
-        verbose_name='Описание произведения'
+        verbose_name='Описание произведения',
+        blank=True
     )
     year = models.SmallIntegerField(
         verbose_name='Год выпуска'
     )
     category = models.ForeignKey(
         Category,
+        on_delete=models.CASCADE,
         verbose_name='Категория',
         related_name='titles',
-        on_delete=models.CASCADE
     )
-    genre = models.ManyToManyField(Genre)
+    genre = models.ManyToManyField(
+        Genre,
+    )
+
+    class Meta:
+        verbose_name = 'произведение',
+        verbose_name_plural = 'Произведения'
+
+    def __str__(self):
+        return self.name
+
+    def clean(self):
+        if self.year > datetime.now().year:
+            raise ValidationError(
+                "Год выпуска не может быть больше текущего года."
+            )
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        return super().save(*args, **kwargs)
