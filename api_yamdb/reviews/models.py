@@ -1,59 +1,50 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils import timezone
 
 from users.models import CustomUser
+from .constants import NAME_LENGTH, SLAG_LENGTH
 
 
 class Category(models.Model):
-    name = models.CharField(
-        max_length=50,
-        verbose_name='Название'
-    )
+    name = models.CharField(max_length=NAME_LENGTH, verbose_name='Название')
     slug = models.SlugField(
-        max_length=50,
+        max_length=SLAG_LENGTH,
         unique=True,
         verbose_name='Слаг'
     )
 
     class Meta:
-        verbose_name = 'Категория'
+        verbose_name = 'категория'
         verbose_name_plural = 'Категории'
+        ordering = ('slug',)
 
     def __str__(self):
         return self.name
 
 
 class Genre(models.Model):
-    name = models.CharField(
-        max_length=50,
-        verbose_name='Название'
-    )
+    name = models.CharField(max_length=NAME_LENGTH, verbose_name='Название')
     slug = models.SlugField(
-        max_length=50,
+        max_length=SLAG_LENGTH,
         unique=True,
         verbose_name='Слаг'
     )
 
     class Meta:
-        verbose_name = 'Жанр'
+        verbose_name = 'жанр'
         verbose_name_plural = 'Жанры'
+        ordering = ('slug',)
 
     def __str__(self):
         return self.name
 
 
 class Title(models.Model):
-    name = models.CharField(
-        max_length=50,
-        verbose_name='Название'
-    )
-    year = models.IntegerField(
-        verbose_name='Год выхода'
-    )
-    description = models.TextField(
-        blank=True,
-        verbose_name='Описание'
-    )
+    name = models.CharField(max_length=NAME_LENGTH, verbose_name='Название')
+    year = models.IntegerField(verbose_name='Год выхода')
+    description = models.TextField(blank=True, verbose_name='Описание')
     category = models.ForeignKey(
         Category,
         related_name='titles',
@@ -64,9 +55,20 @@ class Title(models.Model):
     genre = models.ManyToManyField(
         Genre, related_name='titles', verbose_name='Жанр')
 
+    def clean(self):
+        if self.year < 0:
+            raise ValidationError(
+                'Год выпуска не может быть отрицательным числом'
+            )
+        elif self.year > timezone.now().year:
+            raise ValidationError(
+                'Год выпуска не может быть больше текущего года'
+            )
+
     class Meta:
-        verbose_name = 'Произведение'
+        verbose_name = 'произведение'
         verbose_name_plural = 'Произведения'
+        ordering = ('name',)
 
     def __str__(self):
         return self.name
@@ -79,9 +81,7 @@ class Review(models.Model):
         related_name='reviews',
         verbose_name='Название'
     )
-    text = models.TextField(
-        verbose_name='Текст'
-    )
+    text = models.TextField(verbose_name='Текст')
     author = models.ForeignKey(
         CustomUser,
         on_delete=models.CASCADE,
@@ -98,6 +98,11 @@ class Review(models.Model):
     )
 
     class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['author', 'title'], name='author_title_unique'
+            )
+        ]
         verbose_name = 'отзыв'
         verbose_name_plural = 'Отзывы'
         ordering = ('pub_date',)
@@ -112,9 +117,7 @@ class Comment(models.Model):
         blank=True,
         related_name='comments',
         verbose_name='Отзыв')
-    text = models.TextField(
-        verbose_name='Текст'
-    )
+    text = models.TextField(verbose_name='Текст')
     author = models.ForeignKey(
         CustomUser,
         on_delete=models.CASCADE,
