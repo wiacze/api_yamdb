@@ -4,11 +4,11 @@ from django.db import models
 class Category(models.Model):
     """Модель категории."""
     name = models.CharField(
-        verbose_name='Название группы',
+        verbose_name='Название категории',
         max_length=256,
     )
     slug = models.SlugField(
-        verbose_name='Идентификатор группы',
+        verbose_name='Идентификатор категории',
         help_text=('Идентификатор страницы для URL; разрешены символы '
                    'латиницы, цифры, дефис и подчёркивание.'),
         unique=True
