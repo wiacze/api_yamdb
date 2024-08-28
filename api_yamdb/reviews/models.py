@@ -52,11 +52,8 @@ class Title(models.Model):
     description = models.TextField(
         verbose_name='Описание произведения'
     )
-    slug = models.SlugField(
-        verbose_name='Идентификатор произведения',
-        help_text=('Идентификатор страницы для URL; разрешены символы '
-                   'латиницы, цифры, дефис и подчёркивание.'),
-        unique=True
+    year = models.SmallIntegerField(
+        verbose_name='Год выпуска'
     )
     category = models.ForeignKey(
         Category,
@@ -64,5 +61,4 @@ class Title(models.Model):
         related_name='titles',
         on_delete=models.CASCADE
     )
-    # Создание связующей таблицы title_genre для отношения N-M
     genre = models.ManyToManyField(Genre)
