@@ -8,7 +8,10 @@ from .constants import NAME_LENGTH, SLAG_LENGTH
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=NAME_LENGTH, verbose_name='Название')
+    name = models.CharField(
+        max_length=NAME_LENGTH,
+        verbose_name='Название'
+    )
     slug = models.SlugField(
         max_length=SLAG_LENGTH,
         unique=True,
@@ -25,7 +28,10 @@ class Category(models.Model):
 
 
 class Genre(models.Model):
-    name = models.CharField(max_length=NAME_LENGTH, verbose_name='Название')
+    name = models.CharField(
+        max_length=NAME_LENGTH,
+        verbose_name='Название'
+    )
     slug = models.SlugField(
         max_length=SLAG_LENGTH,
         unique=True,
@@ -42,9 +48,17 @@ class Genre(models.Model):
 
 
 class Title(models.Model):
-    name = models.CharField(max_length=NAME_LENGTH, verbose_name='Название')
-    year = models.IntegerField(verbose_name='Год выхода')
-    description = models.TextField(blank=True, verbose_name='Описание')
+    name = models.CharField(
+        max_length=NAME_LENGTH,
+        verbose_name='Название'
+    )
+    year = models.IntegerField(
+        verbose_name='Год выхода'
+    )
+    description = models.TextField(
+        blank=True,
+        verbose_name='Описание'
+    )
     category = models.ForeignKey(
         Category,
         related_name='titles',
@@ -53,7 +67,10 @@ class Title(models.Model):
         verbose_name='Категория'
     )
     genre = models.ManyToManyField(
-        Genre, related_name='titles', verbose_name='Жанр')
+        Genre,
+        related_name='titles',
+        verbose_name='Жанр'
+    )
 
     def clean(self):
         if self.year < 0:
@@ -81,7 +98,9 @@ class Review(models.Model):
         related_name='reviews',
         verbose_name='Название'
     )
-    text = models.TextField(verbose_name='Текст')
+    text = models.TextField(
+        verbose_name='Текст'
+    )
     author = models.ForeignKey(
         CustomUser,
         on_delete=models.CASCADE,
@@ -117,7 +136,9 @@ class Comment(models.Model):
         blank=True,
         related_name='comments',
         verbose_name='Отзыв')
-    text = models.TextField(verbose_name='Текст')
+    text = models.TextField(
+        verbose_name='Текст'
+    )
     author = models.ForeignKey(
         CustomUser,
         on_delete=models.CASCADE,

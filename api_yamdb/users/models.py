@@ -17,7 +17,10 @@ class CustomUser(AbstractUser):
         (MODERATOR, 'Moderator'),
         (USER, 'User')
     )
-    bio = models.TextField(blank=True, verbose_name='О себе')
+    bio = models.TextField(
+        blank=True,
+        verbose_name='О себе'
+    )
     role = models.CharField(
         max_length=ROLE_LENGTH,
         choices=ROLE_CHOICES,
