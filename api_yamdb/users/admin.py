@@ -1,9 +1,9 @@
 from django.contrib import admin
+from django.contrib.auth import get_user_model
 
-from .models import CustomUser
+User = get_user_model()
 
 
-@admin.register(CustomUser)
 class UserAdmin(admin.ModelAdmin):
     list_display = (
         'id',
@@ -11,11 +11,26 @@ class UserAdmin(admin.ModelAdmin):
         'email',
         'first_name',
         'last_name',
-        'bio',
         'role',
     )
-    list_editable = ('role',)
     search_fields = (
+        'role',
         'username',
+        'first_name',
+        'last_name',
+    )
+    list_filter = (
         'role',
     )
+    list_editable = (
+        'role',
+    )
+    list_display_links = (
+        'id',
+        'username'
+    )
+    list_per_page = 10
+
+
+admin.site.register(User, UserAdmin)
+admin.site.unregister(Group)
