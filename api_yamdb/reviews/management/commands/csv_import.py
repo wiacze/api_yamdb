@@ -82,8 +82,36 @@ class Command(BaseCommand):
 
         return True
 
-    def insert(self, app, model, file):
-        pass
+    def insert(self):
+        for app_name, app_data in IMPORT_DATA.items():
+            # Получаем приложение
+            app_config = apps.get_app_config(app_name)
+
+            # Проходим по моделям приложения
+            for model_name in app_data['models']:
+                model = app_config.get_model(model_name)
+
+                # Проходим по CSV-файлам
+                for csv_file_name in app_data['csv_files']:
+                    # Формируем путь к CSV-файлу
+                    csv_file = os.path.join(FILE_PATH, csv_file_name)
+
+                    # Проверяем наличие файла
+                    if not os.path.exists(csv_file):
+                        raise CommandError(f"File {csv_file_name} not found in {FILE_PATH}")
+
+                    # Открываем CSV-файл
+                    with open(csv_file, 'r', encoding='utf-8') as csvfile:
+                        reader = csv.DictReader(csvfile)
+
+                        # Загружаем данные в модель
+                        for row in reader:
+                            # Создаем экземпляр модели
+                            obj = model(**row)
+
+                            # Сохраняем объект
+                            obj.save()
+
 
     def handle(self, *args, **options):
         '''Отрабатывает импорт данных.'''
@@ -96,41 +124,6 @@ class Command(BaseCommand):
         '''
         app_name = options['app']
         model_name = options['model']
+        file_name = options['file']
         csv_file = os.path.join(FILE_PATH, options['file'])
-        print(app_name, model_name, csv_file)
-        print(self.check_input(app_name, model_name, csv_file))
-        if app_name is None and model_name is None and csv_file is None:
-            return ('All is None')
-        for model_name, csv_file in zip(model_name, csv_file):
-
-            try:
-                model = apps.get_model(
-                    app_label=app_name,
-                    model_name=model_name
-                )
-                print(model.__name__, app_name)
-            except LookupError:
-                self.stderr.write(self.style.ERROR(
-                    f'Model "{model_name}" not found in app "{app_name}".'
-                ))
-                continue
-
-            with open(csv_file, 'r', encoding='utf-8') as csvfile:
-                reader = csv.DictReader(csvfile)
-
-                for row in reader:
-                    if model.__name__ == 'Title':
-                        category_id = int(row['category'])
-
-                        try:
-                            category = Category.objects.get(pk=category_id)
-                        except Category.DoesNotExist:
-                            self.stderr.write(self.style.ERROR(
-                                f"Category with ID {category_id} not found.")
-                            )
-                            continue
-
-                        row['category'] = category
-
-                    model.objects.update_or_create(**row)
 
