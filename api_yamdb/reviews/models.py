@@ -111,6 +111,7 @@ class Review(models.Model):
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
+        related_name='reviews',
         verbose_name='Автор'
     )
     score = models.PositiveIntegerField(
@@ -151,6 +152,7 @@ class Comment(models.Model):
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
+        related_name='comments',
         verbose_name='Автор'
     )
     pub_date = models.DateTimeField(
