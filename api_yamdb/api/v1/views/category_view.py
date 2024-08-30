@@ -1,7 +1,7 @@
 from rest_framework import filters, mixins, viewsets
 
 from reviews.models import Category
-from serializers.category_serializer import CategorySerializer
+from api.v1.serializers.category_serializer import CategorySerializer
 
 
 class CategoryViewSet(mixins.CreateModelMixin,
