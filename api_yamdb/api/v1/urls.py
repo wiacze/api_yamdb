@@ -5,12 +5,12 @@ from api.v1.views.category_view import CategoryViewSet
 from api.v1.views.title_view import TitleViewSet
 
 
-router_v1 = DefaultRouter()
+router = DefaultRouter()
 
-router_v1.register('categories', CategoryViewSet, basename='categories')
-router_v1.register('titles', TitleViewSet, basename='titles')
+router.register('categories', CategoryViewSet, basename='categories')
+router.register('titles', TitleViewSet, basename='titles')
 
 
 urlpatterns = [
-    path('', include(router_v1.urls)),
+    path('', include(router.urls)),
 ]
