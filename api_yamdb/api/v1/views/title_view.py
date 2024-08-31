@@ -1,7 +1,9 @@
-from rest_framework import filters, mixins, viewsets
+from rest_framework import mixins, viewsets
 
 from reviews.models import Title
-from api.v1.serializers.title_serializer import TitleSerializer, TitleCreateSerializer
+from api.v1.serializers.title_serializer import (TitleSerializer,
+                                                 TitleCreateSerializer)
+from api.v1.filters import TitleFilter
 
 
 class TitleViewSet(mixins.CreateModelMixin,
@@ -13,13 +15,7 @@ class TitleViewSet(mixins.CreateModelMixin,
     queryset = Title.objects.all()
     serializer_class = TitleSerializer
     permission_classes = ()
-    filter_backends = (filters.SearchFilter,)
-    filterset_fields = {
-        'category': ['slug'],  # Filter by category slug
-        'genre': ['slug'],  # Filter by genre slug
-        'name': ['icontains'],  # Case-insensitive search by name
-        'year': ['exact']  # Exact match for year
-    }
+    filterset_class = TitleFilter
 
     def get_serializer_class(self):
         if self.action in ['list', 'retrieve']:
