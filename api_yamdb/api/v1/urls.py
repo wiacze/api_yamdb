@@ -5,9 +5,9 @@ from api.v1.views.user_view import (
     UserViewSet, GetTokenViewSet, UserCreateViewSet)
 
 
-router = DefaultRouter()
+router_v1 = DefaultRouter()
 
-router.register('users', UserViewSet, basename='users')
+router_v1.register('users', UserViewSet, basename='users')
 
 auth_urls = [
     path(
@@ -20,5 +20,5 @@ auth_urls = [
 
 urlpatterns = [
     path('auth/', include(auth_urls)),
-    path('', include(router.urls)),
+    path('', include(router_v1.urls)),
 ]

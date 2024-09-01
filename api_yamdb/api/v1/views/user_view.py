@@ -1,14 +1,14 @@
 from rest_framework import status, mixins, viewsets, permissions, filters
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework_simplejwt.tokens import AccessToken
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.tokens import default_token_generator
-from rest_framework_simplejwt.tokens import AccessToken
-
-from api.v1.serializers.user_serializer import User, UserSerializer, GetTokenSerializer, UserCreateSerializer
-
-
 from django.core.mail import send_mail
+
+from api.v1.serializers.user_serializer import (
+    User, UserSerializer, GetTokenSerializer, UserCreateSerializer
+)
 
 
 def send_confirmation_code(email, confirmation_code):
