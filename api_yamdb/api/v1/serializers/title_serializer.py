@@ -29,7 +29,7 @@ class TitleSerializer(serializers.ModelSerializer):
             scores = reviews.values_list('score', flat=True)
             average_rating = round(sum(scores) / len(scores))
             return average_rating
-        return 0
+        return None
 
 
 class TitleCreateSerializer(serializers.ModelSerializer):

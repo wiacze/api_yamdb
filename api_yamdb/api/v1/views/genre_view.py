@@ -2,6 +2,7 @@ from rest_framework import filters, mixins, viewsets
 
 from reviews.models import Genre
 from api.v1.serializers.genre_serializer import GenreSerializer
+from api.v1.permissions import ReadOnlyOrIsAdmin
 
 
 class GenreViewSet(mixins.CreateModelMixin,
@@ -10,7 +11,7 @@ class GenreViewSet(mixins.CreateModelMixin,
                    viewsets.GenericViewSet):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
-    permission_classes = ()
+    permission_classes = (ReadOnlyOrIsAdmin,)
     filter_backends = (filters.SearchFilter,)
     search_fields = ('name',)
     lookup_field = 'slug'
