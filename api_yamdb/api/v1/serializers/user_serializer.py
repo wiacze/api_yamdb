@@ -26,27 +26,26 @@ class SignUpSerializer(serializers.Serializer):
             )
         return value
 
+
     def validate(self, data):
         """
         Проверяет наличие пользователей, соответствующих введенным данным.
         При совпадении проверяет, что оба поля принадлежат одному пользователю.
         """
-        field = ''
-        message = f'Пользователь с таким {field} уже существует.'
-        #  Если есть пользователь с таким юзернеймом.
-        if User.objects.filter(username=data['username']).exists():
-            user = User.objects.get(username=data['username'])
-            #  Если введенный адрес не совпадает с адресом пользователя.
-            if user.email != data['email']:
-                field = 'username'
-                raise serializers.ValidationError(message)
-        #  Если есть пользователь с таким адресом.
-        if User.objects.filter(email=data['email']).exists():
-            user = User.objects.get(email=data['email'])
-            #  Если введенный юзернейм не совпадает с юзернеймом пользователя.
-            if user.username != data['username']:
-                field = 'email'
-                raise serializers.ValidationError(message)
+        username = data['username']
+        email = data['email']
+
+        user_by_username = User.objects.filter(username=username).first()
+        user_by_email = User.objects.filter(email=email).first()
+
+        if user_by_username and user_by_username.email != email:
+            raise serializers.ValidationError(
+                'Пользователь с таким именем уже существует.'
+            )
+        if user_by_email and user_by_email.username != username:
+            raise serializers.ValidationError(
+                'Пользователь с такой почтой уже существует.'
+            )
         return data
 
 
