@@ -26,7 +26,6 @@ class SignUpSerializer(serializers.Serializer):
             )
         return value
 
-
     def validate(self, data):
         """
         Проверяет наличие пользователей, соответствующих введенным данным.
