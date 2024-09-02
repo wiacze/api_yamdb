@@ -5,6 +5,7 @@ from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 
 from .utils import Role
+from api_yamdb.constants import USERFIELDS_LENGTH, EMAIL_LENGTH, REGEX
 
 
 class CustomUser(AbstractUser):
@@ -12,23 +13,23 @@ class CustomUser(AbstractUser):
 
     username = models.CharField(
         verbose_name='Имя пользователя',
-        max_length=150,
+        max_length=USERFIELDS_LENGTH,
         unique=True,
-        validators=[RegexValidator(r'^[\w.@+-]+$'),],
+        validators=[RegexValidator(REGEX),],
     )
     email = models.EmailField(
         verbose_name='Email',
-        max_length=254,
+        max_length=EMAIL_LENGTH,
         unique=True
     )
     first_name = models.CharField(
         verbose_name='Имя',
-        max_length=150,
+        max_length=USERFIELDS_LENGTH,
         blank=True
     )
     last_name = models.CharField(
         verbose_name='Фамилия',
-        max_length=150,
+        max_length=USERFIELDS_LENGTH,
         blank=True
     )
     bio = models.TextField(
