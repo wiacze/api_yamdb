@@ -57,3 +57,12 @@ class CustomUser(AbstractUser):
     @property
     def is_admin(self):
         return self.role == Role.admin.name
+
+    def save(self, *args, **kwargs):
+        """
+        Если в чекбоксе отмечен is_superuser, присваивает роль админ.
+        Не меняет роли у уже созданных пользователей.
+        """
+        if self.is_superuser and not self.pk:
+            self.role = Role.admin.name
+        super().save(*args, **kwargs)
