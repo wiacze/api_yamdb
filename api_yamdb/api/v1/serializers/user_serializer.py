@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 
-from api_yamdb.constants import REGEX, USERFIELDS_LENGTH
+from api_yamdb.constants import REGEX, USERFIELDS_LENGTH, EMAIL_LENGTH
 
 
 User = get_user_model()
@@ -15,7 +15,7 @@ class SignUpSerializer(serializers.Serializer):
         required=True
     )
     email = serializers.EmailField(
-        max_length=USERFIELDS_LENGTH,
+        max_length=EMAIL_LENGTH,
         required=True
     )
 
