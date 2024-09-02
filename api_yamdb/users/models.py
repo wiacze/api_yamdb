@@ -1,61 +1,59 @@
 """Custom user model for YaMDb project."""
 
-from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.forms import ValidationError
+from django.contrib.auth.models import AbstractUser
+from django.core.validators import RegexValidator
 
-from reviews.constants import CODE_LENGTH, ROLE_LENGTH
+from .utils import Role
 
 
 class CustomUser(AbstractUser):
-    ADMIN = 'admin'
-    MODERATOR = 'moderator'
-    USER = 'user'
+    """Кастомная модель пользователя."""
 
-    ROLE_CHOICES = (
-        (ADMIN, 'Admin'),
-        (MODERATOR, 'Moderator'),
-        (USER, 'User')
-    )
-    bio = models.TextField(
-        blank=True,
-        verbose_name='О себе'
-    )
-    role = models.CharField(
-        max_length=ROLE_LENGTH,
-        choices=ROLE_CHOICES,
-        default=USER,
-        verbose_name='Статус'
+    username = models.CharField(
+        verbose_name='Имя пользователя',
+        max_length=150,
+        unique=True,
+        validators=[RegexValidator(r'^[\w.@+-]+$'),],
     )
     email = models.EmailField(
-        'Почтовый адрес',
+        verbose_name='Email',
+        max_length=254,
         unique=True
     )
-    confirmation_code = models.CharField(
-        'Код авторизации',
-        max_length=CODE_LENGTH,
-        default='',
-        blank=True,
+    first_name = models.CharField(
+        verbose_name='Имя',
+        max_length=150,
+        blank=True
+    )
+    last_name = models.CharField(
+        verbose_name='Фамилия',
+        max_length=150,
+        blank=True
+    )
+    bio = models.TextField(
+        verbose_name='Биография',
+        blank=True
+    )
+    role = models.CharField(
+        verbose_name='Роль',
+        max_length=Role.max_length(),
+        choices=Role.selection(),
+        default=Role.user.name
     )
 
-    def clean(self):
-        super().clean()
-        if self.username == 'me':
-            raise ValidationError(
-                '`me` нельзя использовать в качестве имени!'
-            )
-
-    @property
-    def is_admin(self):
-        return self.role == 'admin' or self.is_superuser
-
-    @property
-    def is_moder(self):
-        return self.role == 'moderator'
-
     class Meta:
-        verbose_name = 'пользователь'
+        verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
+        ordering = ('id',)
 
     def __str__(self):
         return self.username
+
+    @property
+    def is_moder(self):
+        return self.role == Role.moderator.name
+
+    @property
+    def is_admin(self):
+        return self.role == Role.admin.name
