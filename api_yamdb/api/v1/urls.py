@@ -6,6 +6,7 @@ from api.v1.views.title_view import TitleViewSet
 from api.v1.views.genre_view import GenreViewSet
 from api.v1.views.user_view import SignUpViewSet, GetTokenViewSet, UserViewSet
 from api.v1.views.review_view import ReviewViewSet
+from api.v1.views.comment_view import CommentViewSet
 
 
 router = DefaultRouter()
@@ -34,6 +35,10 @@ router.register(
     r'titles/(?P<title_id>\d+)/reviews',
     ReviewViewSet,
     basename='reviews'
+)
+router.register(
+    r'titles/(?P<title_id>\d+)/reviews/(?P<review_id>\d+)/comments',
+    CommentViewSet, basename='comments'
 )
 
 auth_urls = [
