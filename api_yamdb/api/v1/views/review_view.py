@@ -1,16 +1,17 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import viewsets
-from rest_framework.exceptions import ValidationError
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework import exceptions, permissions, viewsets
 
-from reviews.models import Title, Review
-from api.v1.serializers.review_serializer import ReviewSerilizer
 from api.v1.permissions import ExtendedRights
+from api.v1.serializers.review_serializer import ReviewSerilizer
+from reviews.models import Review, Title
 
 
 class ReviewViewSet(viewsets.ModelViewSet):
     serializer_class = ReviewSerilizer
-    permission_classes = (ExtendedRights, IsAuthenticatedOrReadOnly)
+    permission_classes = (
+        ExtendedRights,
+        permissions.IsAuthenticatedOrReadOnly
+    )
     http_method_names = ['get', 'post', 'patch', 'delete']
 
     def get_title(self):
@@ -25,7 +26,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
         title = self.get_title()
         user = self.request.user
         if Review.objects.filter(author=user, title=title).exists():
-            raise ValidationError(
+            raise exceptions.ValidationError(
                 {'detail': 'Вы уже оставляли отзыв на это произведение.'}
             )
         serializer.save(author=user, title=title)
