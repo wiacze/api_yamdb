@@ -83,17 +83,13 @@
 
 ## Техническая информация:
 1. Язык программирования: [`Python v.3.9.13`](https://www.python.org/downloads/release/python-3913/)
-1. Библиотеки:
-    1. Фреймворки:
-        1. [`Django`](https://www.djangoproject.com/)(v.3.2.16)- используется для создания веб-приложений, включая API.
-        2. [` Django REST Framework`](https://www.django-rest-framework.org/)(v.3.12.4) - используется для создания REST API в Django.
-    2. Тестирование:
-        1. [`pytest`](https://docs.pytest.org/en/stable/)(v6.2.4) - фреймворк для написания и запуска тестов.
-        2. [`pytest-django`](https://pytest-django.readthedocs.io/en/latest/)(v4.4.0) - плагин для pytest, который предоставляет средства для тестирования Django-приложений.
-        3. [`pytest-pythonpath`](https://pypi.org/project/pytest-pythonpath/)(v0.7.3) - плагин для pytest, который позволяет использовать PYTHONPATH для импорта модулей в тестах.
-    3.  Аутентификация:
-        1. [`djangorestframework-simplejwt`](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/)(v4.7.2) - библиотека для простой реализации JWT-авторизации в DRF.
-    4. Дополнительные:
-        1. [`PyJWT`](https://pyjwt.readthedocs.io/en/stable/)(v2.1.0) - библиотека для работы с JSON Web Tokens (JWT).
-        2. [`requests`](https://requests.readthedocs.io/en/master/)(v2.26.0) - библиотека для отправки HTTP-запросов.
-        3. [`django-filter`](https://django-filter.readthedocs.io/en/stable/guide/install.html)(v.23.1) - библиотека для фильтрации запросов к API.
+1. Библиотеки: \
+            2.1. [`Django`](https://www.djangoproject.com/)(v.3.2.16)- используется для создания веб-приложений, включая API. \
+            2.2. [` Django REST Framework`](https://www.django-rest-framework.org/)(v.3.12.4) - используется для создания REST API в Django. \
+            2.3. [`pytest`](https://docs.pytest.org/en/stable/)(v6.2.4) - фреймворк для написания и запуска тестов. \
+            2.4. [`pytest-django`](https://pytest-django.readthedocs.io/en/latest/)(v4.4.0) - плагин для pytest, который предоставляет средства для тестирования Django-приложений. \
+            2.5. [`pytest-pythonpath`](https://pypi.org/project/pytest-pythonpath/)(v0.7.3) - плагин для pytest, который позволяет использовать PYTHONPATH для импорта модулей в тестах. \
+            2.6. [`djangorestframework-simplejwt`](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/)(v4.2.7.) - библиотека для простой реализации JWT-авторизации в DRF. \
+            2.7. [`PyJWT`](https://pyjwt.readthedocs.io/en/stable/)(v2.1.0) - библиотека для работы с JSON Web Tokens (JWT). \
+            2.8. [`requests`](https://requests.readthedocs.io/en/master/)(v2.26.0) - библиотека для отправки HTTP-запросов. \
+            2.9. [`django-filter`](https://django-filter.readthedocs.io/en/stable/guide/install.html)(v.23.1) - библиотека для фильтрации запросов к API.
