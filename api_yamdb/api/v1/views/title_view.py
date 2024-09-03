@@ -1,15 +1,14 @@
-from rest_framework import mixins, viewsets
+from rest_framework import viewsets
 
-from reviews.models import Title
-from api.v1.serializers.title_serializer import (TitleSerializer,
-                                                 TitleCreateSerializer)
 from api.v1.filters import TitleFilter
 from api.v1.permissions import ReadOnlyOrIsAdmin
+from api.v1.serializers.title_serializer import (TitleCreateSerializer,
+                                                 TitleSerializer)
+from reviews.models import Title
 
 
 class TitleViewSet(viewsets.ModelViewSet):
     queryset = Title.objects.all()
-    serializer_class = TitleSerializer
     permission_classes = (ReadOnlyOrIsAdmin,)
     filterset_class = TitleFilter
     http_method_names = ['get', 'post', 'patch', 'delete']

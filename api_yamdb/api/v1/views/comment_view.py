@@ -2,8 +2,8 @@ from django.shortcuts import get_object_or_404
 from rest_framework import permissions
 from rest_framework.viewsets import ModelViewSet
 
-from api.v1.serializers.comment_serializers import CommentSerializer
 from api.v1.permissions import ExtendedRights
+from api.v1.serializers.comment_serializers import CommentSerializer
 from reviews.models import Review
 
 

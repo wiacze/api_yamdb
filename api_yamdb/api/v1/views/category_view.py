@@ -1,8 +1,8 @@
 from rest_framework import filters, mixins, viewsets
 
-from reviews.models import Category
-from api.v1.serializers.category_serializer import CategorySerializer
 from api.v1.permissions import ReadOnlyOrIsAdmin
+from api.v1.serializers.category_serializer import CategorySerializer
+from reviews.models import Category
 
 
 class CategoryViewSet(mixins.CreateModelMixin,
