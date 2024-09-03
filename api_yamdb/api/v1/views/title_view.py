@@ -7,12 +7,7 @@ from api.v1.filters import TitleFilter
 from api.v1.permissions import ReadOnlyOrIsAdmin
 
 
-class TitleViewSet(mixins.CreateModelMixin,
-                   mixins.RetrieveModelMixin,
-                   mixins.ListModelMixin,
-                   mixins.DestroyModelMixin,
-                   mixins.UpdateModelMixin,
-                   viewsets.GenericViewSet):
+class TitleViewSet(viewsets.ModelViewSet):
     queryset = Title.objects.all()
     serializer_class = TitleSerializer
     permission_classes = (ReadOnlyOrIsAdmin,)
