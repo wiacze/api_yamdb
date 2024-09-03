@@ -1,8 +1,8 @@
 from rest_framework import filters, mixins, viewsets
 
-from reviews.models import Genre
-from api.v1.serializers.genre_serializer import GenreSerializer
 from api.v1.permissions import ReadOnlyOrIsAdmin
+from api.v1.serializers.genre_serializer import GenreSerializer
+from reviews.models import Genre
 
 
 class GenreViewSet(mixins.CreateModelMixin,
