@@ -1,4 +1,4 @@
-from rest_framework import mixins, viewsets
+from rest_framework import viewsets
 
 from reviews.models import Title
 from api.v1.serializers.title_serializer import (TitleSerializer,
