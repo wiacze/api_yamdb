@@ -8,23 +8,33 @@
 
 ## Установка
 - Клонируйте репозиторий:
+  
     ```git clone https://github.com/wiacze/api_yamdb.git```
 
 - Создать и активировать виртуальное окружение:
     
     Для OS Windows:
+  
     ```python -m venv venv```
+  
     ```source venv/Scripts/activate```
+  
     Для OS Linux/MacOS:
+  
     ```python3 -m venv venv```
+  
     ```source venv/bin/activate```
 
 - Обновите pip и установите зависимости:
+  
     ```python -m pip install --upgrade pip```
+  
     ```pip install -r requirements.txt```
 - Выполните миграции:
+  
     ```python manage.py migrate```
 - Запустите сервер разработки:
+  
     ```python manage.py runserver```
 
 ## Ресурсы API
