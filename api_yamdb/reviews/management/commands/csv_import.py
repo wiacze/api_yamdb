@@ -95,14 +95,14 @@ class Command(BaseCommand):
     def insert(self, app, data):
         app_config = apps.get_app_config(app)
 
-        if len(data['models']) != len(data['csv_files']):
+        if len(data.get('models')) != len(data.get('csv_files')):
             raise ValueError(
                 "Списки models и csv_files должны быть одинаковой длины"
             )
 
         for i in range(len(data['models'])):
-            model_name = data['models'][i]
-            csv_file_name = data['csv_files'][i]
+            model_name = data.get('models', [])[i]
+            csv_file_name = data.get('csv_files', [])[i]
 
             model = app_config.get_model(model_name)
             csv_file = os.path.join(FILE_PATH, csv_file_name)
@@ -151,10 +151,10 @@ class Command(BaseCommand):
         Если аргументы не переданы -> вставка по пресету:
         приложение - модель - файл
         """
-        app_name = options['app']
-        model_name = options['model']
-        file_name = options['file']
-        if app_name and model_name and file_name:
+        app_name = options.get('app')
+        model_name = options.get('model')
+        file_name = options.get('file')
+        if all([app_name, model_name, file_name]):
             self.check_input(app_name, model_name, file_name)
             self.insert(
                 app_name,
@@ -164,19 +164,13 @@ class Command(BaseCommand):
         elif app_name and not model_name and not file_name:
             if app_name in IMPORT_DATA:
                 current_data = IMPORT_DATA[app_name]
-                for i in range(len(current_data['models'])):
-                    self.check_input(
-                        app_name,
-                        current_data['models'][i],
-                        current_data['csv_files'][i]
-                    )
+                for i, model_name in enumerate(current_data.get('models', [])):
+                    csv_file_name = current_data.get('csv_files', [])[i]
+                    self.check_input(app_name, model_name, csv_file_name)
                 self.insert(app_name, current_data)
         else:
             for app, data in IMPORT_DATA.items():
-                for i in range(len(data['models'])):
-                    self.check_input(
-                        app,
-                        data['models'][i],
-                        data['csv_files'][i]
-                    )
+                for i, model_name in enumerate(data.get('models', [])):
+                    csv_file_name = data.get('csv_files', [])[i]
+                    self.check_input(app, model_name, csv_file_name)
                 self.insert(app, data)
