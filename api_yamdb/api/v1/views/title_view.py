@@ -9,7 +9,6 @@ from api.v1.permissions import ReadOnlyOrIsAdmin
 
 class TitleViewSet(viewsets.ModelViewSet):
     queryset = Title.objects.all()
-    serializer_class = TitleSerializer
     permission_classes = (ReadOnlyOrIsAdmin,)
     filterset_class = TitleFilter
     http_method_names = ['get', 'post', 'patch', 'delete']
