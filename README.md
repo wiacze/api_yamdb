@@ -85,7 +85,7 @@
 1. Язык программирования: [`Python v.3.9.13`](https://www.python.org/downloads/release/python-3913/)
 1. Библиотеки: \
             2.1. [`Django`](https://www.djangoproject.com/)(v.3.2.16)- используется для создания веб-приложений, включая API. \
-            2.2. [` Django REST Framework`](https://www.django-rest-framework.org/)(v.3.12.4) - используется для создания REST API в Django. \
+            2.2. [`Django REST Framework`](https://www.django-rest-framework.org/)(v.3.12.4) - используется для создания REST API в Django. \
             2.3. [`pytest`](https://docs.pytest.org/en/stable/)(v6.2.4) - фреймворк для написания и запуска тестов. \
             2.4. [`pytest-django`](https://pytest-django.readthedocs.io/en/latest/)(v4.4.0) - плагин для pytest, который предоставляет средства для тестирования Django-приложений. \
             2.5. [`pytest-pythonpath`](https://pypi.org/project/pytest-pythonpath/)(v0.7.3) - плагин для pytest, который позволяет использовать PYTHONPATH для импорта модулей в тестах. \
