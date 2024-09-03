@@ -1,4 +1,4 @@
-# Проект API YaMDb
+ Проект API YaMDb
 
 ## Описание
 Проект **YaMDb** собирает отзывы пользователей на произведения. Сами произведения в YaMDb не хранятся, здесь нельзя посмотреть фильм или послушать музыку.
@@ -7,48 +7,35 @@
 Благодарные или возмущённые пользователи оставляют к произведениям текстовые отзывы и ставят произведению оценку в диапазоне от одного до десяти (целое число); из пользовательских оценок формируется усреднённая оценка произведения — рейтинг (целое число). На одно произведение пользователь может оставить только один отзыв.
 
 ## Установка
-1. Клонируйте репозиторий:
-    ```bash
-    git clone https://github.com/wiacze/api_yamdb.git
-    ```
+- Клонируйте репозиторий:
+  
+    ```git clone https://github.com/wiacze/api_yamdb.git```
 
-    ```
-    cd api_yamdb
-    ```
-2. Создать и активировать виртуальное окружение:
+- Создать и активировать виртуальное окружение:
     
     Для OS Windows:
-    ```
-    python -m venv venv
-    ```
-
-    ```
-    source venv/Scripts/activate
-    ```
+  
+    ```python -m venv venv```
+  
+    ```source venv/Scripts/activate```
+  
     Для OS Linux/MacOS:
-    ```
-    python3 -m venv venv
-    ```
+  
+    ```python3 -m venv venv```
+  
+    ```source venv/bin/activate```
 
-    ```
-    source venv/bin/activate
-    ```
-
-3. Обновите pip и установите зависимости:
-    ```bash
-    python -m pip install --upgrade pip
-    ```
-    ```bash
-    pip install -r requirements.txt
-    ```
-4. Выполните миграции:
-    ```bash
-    python manage.py migrate
-    ```
-5. Запустите сервер разработки:
-    ```bash
-    python manage.py runserver
-    ```
+- Обновите pip и установите зависимости:
+  
+    ```python -m pip install --upgrade pip```
+  
+    ```pip install -r requirements.txt```
+- Выполните миграции:
+  
+    ```python manage.py migrate```
+- Запустите сервер разработки:
+  
+    ```python manage.py runserver```
 
 ## Ресурсы API
 
@@ -70,7 +57,7 @@
 
 ```/titles/```: Произведения (фильмы, книги, песни)
 
-```/titles/{title_id}/```: Получение информации о произведении
+```/titles/{titles_id}/```: Получение информации о произведении
 
 ```/{title_id}/reviews/```: Отзывы на произведения
 
@@ -79,6 +66,8 @@
 ```/{review_id}/comments/```: Комментарии к отзывам
 
 ```/comments/{comment_id}/```: Полуение комментария по id
+
+#### Полная документация будет доступна по адресу [http://127.0.0.1:8000/redoc/](http://127.0.0.1:8000/redoc/)
 
 ## Права доступа
 
