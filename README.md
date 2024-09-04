@@ -88,3 +88,8 @@
             2.7. [`PyJWT`](https://pyjwt.readthedocs.io/en/stable/)(v2.1.0) - библиотека для работы с JSON Web Tokens (JWT). \
             2.8. [`requests`](https://requests.readthedocs.io/en/master/)(v2.26.0) - библиотека для отправки HTTP-запросов. \
             2.9. [`django-filter`](https://django-filter.readthedocs.io/en/stable/guide/install.html)(v.23.1) - библиотека для фильтрации запросов к API.
+
+#### Над проектом работали:
+[`Ян Языков`](https://github.com/wiacze)
+[`Камиль Высочкий`](https://github.com/KamilVysotskij)
+[`Антон Савченко`](https://github.com/Anthonyz1337)
