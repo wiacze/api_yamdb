@@ -143,78 +143,11 @@ POST http://127.0.0.1:8000/api/v1/auth/token/
 
 --- 
 
-### Получение списка категорий
-```
-GET http://127.0.0.1:8000/api/v1/categories/
-```
-
-<details>
-  <summary>Response</summary>
-    <pre>{
-    "count": 3,
-    "next": null,
-    "previous": null,
-    "results": [
-        {
-            "name": "Книга",
-            "slug": "book"
-        },
-        {
-            "name": "Фильм",
-            "slug": "movie"
-        },
-        {
-            "name": "Музыка",
-            "slug": "music"
-        }
-    ]
-}   </pre>
-</details>
-
----
-
-### Получение списка жанров
-```
-GET http://127.0.0.1:8000/api/v1/genres/
-```
-<details>
-  <summary>Response</summary>
-    <pre>{
-    "count": 15,
-    "next": "http://127.0.0.1:8000/api/v1/genres/?page=2",
-    "previous": null,
-    "results": [
-        {
-            "name": "Баллада",
-            "slug": "ballad"
-        },
-        {
-            "name": "Шансон",
-            "slug": "chanson"
-        },
-        {
-            "name": "Классика",
-            "slug": "classical"
-        },
-        {
-            "name": "Комедия",
-            "slug": "comedy"
-        },
-        {
-            "name": "Детектив",
-            "slug": "detective"
-        }
-    ]
-}   </pre>
-</details>
-
---- 
-
 ### Получение списка произведений
 ```
 GET http://127.0.0.1:8000/api/v1/titles/
 ```
-
+Аналогично для жанров, категорий, комментариев и других GET запросов.
 <details>
   <summary>Response</summary>
     <pre>{
@@ -313,38 +246,6 @@ GET http://127.0.0.1:8000/api/v1/titles/
 
 --- 
 
-### Получение списка отзывов к произведению
-```
-GET http://127.0.0.1:8000/api/v1/titles/3/reviews/
-```
-
-<details>
-  <summary>Response</summary>
-    <pre>{
-    "count": 2,
-    "next": null,
-    "previous": null,
-    "results": [
-        {
-            "id": 16,
-            "text": "Сходила в кино, решила написать: драйв и огонь, но иногда какой-то бред на экране. В середине фильма просто отличные диалоги! Пусть будет 7",
-            "author": "bingobongo",
-            "score": 7,
-            "pub_date": "2024-09-03T23:32:39.332214+03:00"
-        },
-        {
-            "id": 17,
-            "text": "Смотрел, не отрываясь, хочу описать свои впечатления. По моему мнению, сценарий подкачал, зато подбор актёров - супер. Начало немного затянуто. Оператору - Оскара! Всё остальное - не очень. Фильм тянет на 8 из 10",
-            "author": "capt_obvious",
-            "score": 8,
-            "pub_date": "2024-09-03T23:32:39.337200+03:00"
-        }
-    ]
-}   </pre>
-</details>
-
---- 
-
 ### Создание отзыва к произведению
 ```
 POST http://127.0.0.1:8000/api/v1/titles/3/reviews/
@@ -407,42 +308,6 @@ DELETE http://127.0.0.1:8000/api/v1/titles/3/reviews/76/
 
 
 --- 
-
-### Получение списка комментариев к отзыву
-```
-GET http://127.0.0.1:8000/api/v1/titles/3/reviews/77/comments/
-```
-<details>
-  <summary>Response</summary>
-    <pre>{
-    "count": 3,
-    "next": null,
-    "previous": null,
-    "results": [
-        {
-            "id": 4,
-            "review": "Test review",
-            "author": "TestUser1",
-            "text": "Test comment 1",
-            "pub_date": "2024-09-04T18:10:20.667795+03:00"
-        },
-        {
-            "id": 5,
-            "review": "Test review",
-            "author": "TestUser1",
-            "text": "Test comment 2",
-            "pub_date": "2024-09-04T18:10:48.248829+03:00"
-        },
-        {
-            "id": 6,
-            "review": "Test review",
-            "author": "TestUser1",
-            "text": "Test comment 3",
-            "pub_date": "2024-09-04T18:10:50.985962+03:00"
-        }
-    ]
-}</pre>
-</details>
 
 ### Создание комментария к отзыву
 ```
