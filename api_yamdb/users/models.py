@@ -15,7 +15,7 @@ class CustomUser(AbstractUser):
         verbose_name='Имя пользователя',
         max_length=USERFIELDS_LENGTH,
         unique=True,
-        validators=[RegexValidator(REGEX),]
+        validators=[RegexValidator(REGEX), ]
     )
     email = models.EmailField(
         verbose_name='Email',
