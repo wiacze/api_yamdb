@@ -91,5 +91,5 @@
 
 #### Над проектом работали:
 [`Ян Языков`](https://github.com/wiacze)
-[`Камиль Высочкий`](https://github.com/KamilVysotskij)
+[`Камиль Высоцкий`](https://github.com/KamilVysotskij)
 [`Антон Савченко`](https://github.com/Anthonyz1337)
