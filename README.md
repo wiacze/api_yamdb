@@ -490,11 +490,11 @@ POST http://127.0.0.1:8000/api/v1/titles/3/reviews/77/comments/
 
 ```/{title_id}/reviews/```: Отзывы на произведения
 
-```/reviews/{review_id}/```: Полуение отзыва по id
+```/reviews/{review_id}/```: Получение отзыва по id
 
 ```/{review_id}/comments/```: Комментарии к отзывам
 
-```/comments/{comment_id}/```: Полуение комментария по id
+```/comments/{comment_id}/```: Получение комментария по id
 
 #### Полная документация будет доступна по адресу [http://127.0.0.1:8000/redoc/](http://127.0.0.1:8000/redoc/)
 
