@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
+from django.db.models import Q
 
 from api_yamdb.constants import REGEX, USERFIELDS_LENGTH, EMAIL_LENGTH
 
@@ -35,8 +36,7 @@ class SignUpSerializer(serializers.Serializer):
         email = data['email']
 
         user = (
-            User.objects.filter(username=username).first()
-            or User.objects.filter(email=email).first()
+            User.objects.filter(Q(username=username) | Q(email=email)).first()
         )
 
         if user and user.email != email:
