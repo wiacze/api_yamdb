@@ -1,5 +1,6 @@
-from rest_framework import serializers
 from django.contrib.auth import get_user_model
+from django.db.models import Q
+from rest_framework import serializers
 
 from api_yamdb.constants import REGEX, USERFIELDS_LENGTH, EMAIL_LENGTH
 
@@ -34,14 +35,13 @@ class SignUpSerializer(serializers.Serializer):
         username = data['username']
         email = data['email']
 
-        user_by_username = User.objects.filter(username=username).first()
-        user_by_email = User.objects.filter(email=email).first()
+        user = User.objects.filter(Q(username=username) | Q(email=email)).first()
 
-        if user_by_username and user_by_username.email != email:
+        if user and user.email != email:
             raise serializers.ValidationError(
                 'Пользователь с таким именем уже существует.'
             )
-        if user_by_email and user_by_email.username != username:
+        if user and user.username != username:
             raise serializers.ValidationError(
                 'Пользователь с такой почтой уже существует.'
             )
