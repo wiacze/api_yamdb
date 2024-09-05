@@ -8,14 +8,4 @@ class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields = ('name', 'slug')
-
-
-class CategoryRelatedField(serializers.SlugRelatedField):
-    """Полностью настраиваемое реляционное поле, которое точно описывает,
-    как выходное представление должно быть сгенерировано из экземпляра модели.
-    """
-
-    def to_representation(self, value):
-        serializer = CategorySerializer(value)
-        return serializer.data
+        fields = ('name', 'slug',)

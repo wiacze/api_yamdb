@@ -9,10 +9,3 @@ class GenreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genre
         fields = ('name', 'slug',)
-
-
-class GenreField(serializers.SlugRelatedField):
-
-    def to_representation(self, value):
-        serializer = GenreSerializer(value)
-        return serializer.data
