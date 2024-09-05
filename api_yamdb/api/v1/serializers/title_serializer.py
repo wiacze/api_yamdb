@@ -6,7 +6,7 @@ from reviews.models import Title, Genre, Category
 
 
 class TitleSerializer(serializers.ModelSerializer):
-    rating = serializers.SerializerMethodField(read_only=True)
+    rating = serializers.IntegerField(read_only=True)
     genre = GenreSerializer(many=True, required=True)
     category = CategorySerializer(required=True)
 
@@ -21,15 +21,6 @@ class TitleSerializer(serializers.ModelSerializer):
             'genre',
             'category'
         )
-
-    def get_rating(self, obj):
-        """Вычисляет среднее значение рейтинга для данного Title."""
-        reviews = obj.reviews.all()
-        if reviews.exists():
-            scores = reviews.values_list('score', flat=True)
-            average_rating = round(sum(scores) / len(scores))
-            return average_rating
-        return None
 
 
 class TitleCreateSerializer(serializers.ModelSerializer):
