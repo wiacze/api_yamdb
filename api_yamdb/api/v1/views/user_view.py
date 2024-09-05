@@ -81,7 +81,8 @@ class UserViewSet(
     def patch_user(self, request, username):
         serializer = self.get_serializer(
             self.get_user(username=username),
-            data=request.data, partial=True,
+            data=request.data,
+            partial=True,
         )
         serializer.is_valid(raise_exception=True)
         serializer.save()
@@ -91,7 +92,6 @@ class UserViewSet(
     def delete_user(self, request, username):
         self.get_user(username=username).delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
 
     @action(
         detail=False,
@@ -107,8 +107,10 @@ class UserViewSet(
     @me_data.mapping.patch
     def patch_me_data(self, request):
         serializer = self.get_serializer(
-            request.user, data=request.data,
-            partial=True, context={'request': request},
+            request.user,
+            data=request.data,
+            partial=True,
+            context={'request': request},
         )
         serializer.is_valid(raise_exception=True)
         serializer.save(role=request.user.role)
