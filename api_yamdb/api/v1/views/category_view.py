@@ -1,8 +1,8 @@
 from rest_framework import filters
 
+from api.v1.mixins import CustomMixins
 from api.v1.permissions import ReadOnlyOrIsAdmin
 from api.v1.serializers.category_serializer import CategorySerializer
-from api.v1.mixins import CustomMixins
 from reviews.models import Category
 
 
