@@ -4,7 +4,7 @@ from reviews.models import Category
 
 
 class CategorySerializer(serializers.ModelSerializer):
-    lookup_field = 'slug'  # Для поиска объекта в БД будет поле slug
+    lookup_field = 'slug'
 
     class Meta:
         model = Category

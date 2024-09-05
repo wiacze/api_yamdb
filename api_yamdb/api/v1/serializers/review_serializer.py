@@ -13,7 +13,7 @@ class ReviewSerilizer(serializers.ModelSerializer):
             'text',
             'author',
             'score',
-            'pub_date'
+            'pub_date',
         )
 
     def validate(self, data):

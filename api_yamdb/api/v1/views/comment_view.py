@@ -10,9 +10,15 @@ from reviews.models import Review
 class CommentViewSet(ModelViewSet):
     serializer_class = CommentSerializer
     permission_classes = (
-        IsAdminIsModerIsAuthorOrReadOnly, permissions.IsAuthenticatedOrReadOnly
+        IsAdminIsModerIsAuthorOrReadOnly,
+        permissions.IsAuthenticatedOrReadOnly,
     )
-    http_method_names = ('get', 'post', 'patch', 'delete')
+    http_method_names = (
+        'get',
+        'post',
+        'patch',
+        'delete',
+    )
 
     def get_review(self):
         review_id = self.kwargs.get('review_id')

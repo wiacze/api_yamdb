@@ -12,7 +12,12 @@ class ReviewViewSet(viewsets.ModelViewSet):
         IsAdminIsModerIsAuthorOrReadOnly,
         permissions.IsAuthenticatedOrReadOnly
     )
-    http_method_names = ['get', 'post', 'patch', 'delete']
+    http_method_names = (
+        'get',
+        'post',
+        'patch',
+        'delete',
+    )
 
     def get_title(self):
         title_id = self.kwargs.get('title_id')

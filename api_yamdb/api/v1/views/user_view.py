@@ -12,10 +12,8 @@ from api.v1.serializers.user_serializer import (
 )
 
 
-class SignUpViewSet(
-    mixins.CreateModelMixin,
-    viewsets.GenericViewSet
-):
+class SignUpViewSet(mixins.CreateModelMixin,
+                    viewsets.GenericViewSet):
     queryset = User.objects.all()
     serializer_class = SignUpSerializer
 
@@ -33,10 +31,8 @@ class SignUpViewSet(
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-class GetTokenViewSet(
-    mixins.CreateModelMixin,
-    viewsets.GenericViewSet
-):
+class GetTokenViewSet(mixins.CreateModelMixin,
+                      viewsets.GenericViewSet):
     queryset = User.objects.all()
     serializer_class = GetTokenSerializer
 
@@ -53,11 +49,9 @@ class GetTokenViewSet(
         return Response(message, status=status.HTTP_200_OK)
 
 
-class UserViewSet(
-    mixins.ListModelMixin,
-    mixins.CreateModelMixin,
-    viewsets.GenericViewSet
-):
+class UserViewSet(mixins.ListModelMixin,
+                  mixins.CreateModelMixin,
+                  viewsets.GenericViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (IsAdmin,)
