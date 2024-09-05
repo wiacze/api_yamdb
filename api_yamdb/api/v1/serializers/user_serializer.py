@@ -1,6 +1,6 @@
-from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from django.db.models import Q
+from rest_framework import serializers
 
 from api_yamdb.constants import REGEX, USERFIELDS_LENGTH, EMAIL_LENGTH
 
