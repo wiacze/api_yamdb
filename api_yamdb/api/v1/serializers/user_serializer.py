@@ -34,14 +34,16 @@ class SignUpSerializer(serializers.Serializer):
         username = data['username']
         email = data['email']
 
-        user_by_username = User.objects.filter(username=username).first()
-        user_by_email = User.objects.filter(email=email).first()
+        user = (
+            User.objects.filter(username=username).first()
+            or User.objects.filter(email=email).first()
+        )
 
-        if user_by_username and user_by_username.email != email:
+        if user and user.email != email:
             raise serializers.ValidationError(
                 'Пользователь с таким именем уже существует.'
             )
-        if user_by_email and user_by_email.username != username:
+        if user and user.username != username:
             raise serializers.ValidationError(
                 'Пользователь с такой почтой уже существует.'
             )
