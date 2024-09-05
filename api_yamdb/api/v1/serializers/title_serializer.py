@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from django.db.models import Avg
 
 from api.v1.serializers.category_serializer import CategorySerializer
 from api.v1.serializers.genre_serializer import GenreSerializer

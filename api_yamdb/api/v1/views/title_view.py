@@ -1,6 +1,5 @@
-from rest_framework import viewsets
-
 from django.db.models import Avg
+from rest_framework import viewsets
 
 from api.v1.filters import TitleFilter
 from api.v1.permissions import ReadOnlyOrIsAdmin
