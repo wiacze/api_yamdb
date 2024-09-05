@@ -35,9 +35,7 @@ class SignUpSerializer(serializers.Serializer):
         username = data['username']
         email = data['email']
 
-        user = (
-            User.objects.filter(Q(username=username) | Q(email=email)).first()
-        )
+        user = User.objects.filter(Q(username=username) | Q(email=email)).first()
 
         if user and user.email != email:
             raise serializers.ValidationError(
