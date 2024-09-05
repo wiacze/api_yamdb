@@ -405,7 +405,6 @@ DELETE http://127.0.0.1:8000/api/v1/titles/3/reviews/76/
     <pre>204 - No Content</pre>
 </details>
 
-
 --- 
 
 ### Получение списка комментариев к отзыву
@@ -443,6 +442,8 @@ GET http://127.0.0.1:8000/api/v1/titles/3/reviews/77/comments/
     ]
 }</pre>
 </details>
+
+---
 
 ### Создание комментария к отзыву
 ```
