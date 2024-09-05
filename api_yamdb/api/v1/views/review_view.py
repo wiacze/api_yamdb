@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import exceptions, permissions, viewsets
 
-from api.v1.permissions import ExtendedRights
+from api.v1.permissions import IsAdminIsModerIsAuthorOrReadOnly
 from api.v1.serializers.review_serializer import ReviewSerilizer
 from reviews.models import Review, Title
 
@@ -9,7 +9,7 @@ from reviews.models import Review, Title
 class ReviewViewSet(viewsets.ModelViewSet):
     serializer_class = ReviewSerilizer
     permission_classes = (
-        ExtendedRights,
+        IsAdminIsModerIsAuthorOrReadOnly,
         permissions.IsAuthenticatedOrReadOnly
     )
     http_method_names = ['get', 'post', 'patch', 'delete']
