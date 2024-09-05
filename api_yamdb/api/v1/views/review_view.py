@@ -1,9 +1,9 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import exceptions, permissions, viewsets
+from rest_framework import permissions, viewsets
 
 from api.v1.permissions import ExtendedRights
 from api.v1.serializers.review_serializer import ReviewSerilizer
-from reviews.models import Review, Title
+from reviews.models import Title
 
 
 class ReviewViewSet(viewsets.ModelViewSet):

@@ -1,3 +1,4 @@
+from django.db.models import Avg
 from rest_framework import viewsets
 
 from api.v1.filters import TitleFilter
@@ -8,7 +9,9 @@ from reviews.models import Title
 
 
 class TitleViewSet(viewsets.ModelViewSet):
-    queryset = Title.objects.all()
+    queryset = Title.objects.annotate(
+        rating=Avg('reviews__score')
+    ).order_by('-rating').all()
     permission_classes = (ReadOnlyOrIsAdmin,)
     filterset_class = TitleFilter
     http_method_names = ['get', 'post', 'patch', 'delete']
