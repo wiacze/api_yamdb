@@ -1,9 +1,9 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import exceptions, permissions, viewsets
+from rest_framework import permissions, viewsets
 
 from api.v1.permissions import IsAdminIsModerIsAuthorOrReadOnly
 from api.v1.serializers.review_serializer import ReviewSerilizer
-from reviews.models import Review, Title
+from reviews.models import Title
 
 
 class ReviewViewSet(viewsets.ModelViewSet):
@@ -25,8 +25,4 @@ class ReviewViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         title = self.get_title()
         user = self.request.user
-        if Review.objects.filter(author=user, title=title).exists():
-            raise exceptions.ValidationError(
-                {'detail': 'Вы уже оставляли отзыв на это произведение.'}
-            )
         serializer.save(author=user, title=title)
