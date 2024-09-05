@@ -9,8 +9,8 @@ from reviews.models import Review, Title
 class ReviewViewSet(viewsets.ModelViewSet):
     serializer_class = ReviewSerilizer
     permission_classes = (
-        ExtendedRights,
-        permissions.IsAuthenticatedOrReadOnly
+        permissions.IsAuthenticatedOrReadOnly,
+        ExtendedRights
     )
     http_method_names = ['get', 'post', 'patch', 'delete']
 
@@ -25,8 +25,4 @@ class ReviewViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         title = self.get_title()
         user = self.request.user
-        if Review.objects.filter(author=user, title=title).exists():
-            raise exceptions.ValidationError(
-                {'detail': 'Вы уже оставляли отзыв на это произведение.'}
-            )
         serializer.save(author=user, title=title)
