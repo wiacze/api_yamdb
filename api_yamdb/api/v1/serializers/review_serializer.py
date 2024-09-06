@@ -20,12 +20,11 @@ class ReviewSerilizer(serializers.ModelSerializer):
         if self.instance is None:
             user = self.context['request'].user
             title = self.context['view'].kwargs.get('title_id')
-            existing_review = Review.objects.filter(
+
+            if Review.objects.filter(
                 author=user,
                 title=title
-            ).exists()
-
-            if existing_review:
+            ).exists():
                 raise serializers.ValidationError(
                     "Вы уже оставили отзыв к этому произведению."
                 )
