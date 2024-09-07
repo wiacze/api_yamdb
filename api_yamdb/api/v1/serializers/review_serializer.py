@@ -23,7 +23,7 @@ class ReviewSerilizer(serializers.ModelSerializer):
 
             if Review.objects.filter(
                 author=user,
-                title=title
+                title=title,
             ).exists():
                 raise serializers.ValidationError(
                     "Вы уже оставили отзыв к этому произведению."

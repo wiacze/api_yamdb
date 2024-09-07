@@ -13,11 +13,11 @@ class SignUpSerializer(serializers.Serializer):
     username = serializers.RegexField(
         regex=REGEX,
         max_length=USERFIELDS_LENGTH,
-        required=True
+        required=True,
     )
     email = serializers.EmailField(
         max_length=EMAIL_LENGTH,
-        required=True
+        required=True,
     )
 
     def validate_username(self, value):
@@ -53,11 +53,11 @@ class GetTokenSerializer(serializers.Serializer):
     username = serializers.RegexField(
         regex=REGEX,
         max_length=USERFIELDS_LENGTH,
-        required=True
+        required=True,
     )
     confirmation_code = serializers.CharField(
         max_length=USERFIELDS_LENGTH,
-        required=True
+        required=True,
     )
 
 
@@ -71,5 +71,5 @@ class UserSerializer(serializers.ModelSerializer):
             'first_name',
             'last_name',
             'bio',
-            'role'
+            'role',
         )

@@ -26,7 +26,7 @@ class SignUpViewSet(mixins.CreateModelMixin,
         confirmation_code = default_token_generator.make_token(user)
         send_confirmation_code(
             email=user.email,
-            confirmation_code=confirmation_code
+            confirmation_code=confirmation_code,
         )
         return Response(serializer.data, status=status.HTTP_200_OK)
 

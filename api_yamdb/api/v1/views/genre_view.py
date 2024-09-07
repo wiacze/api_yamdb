@@ -1,12 +1,12 @@
 from rest_framework import filters
 
-from api.v1.mixins import CustomMixin
+from api.v1.mixins import CreateDestroyListMixin
 from api.v1.permissions import IsAdminOrReadOnly
 from api.v1.serializers.genre_serializer import GenreSerializer
 from reviews.models import Genre
 
 
-class GenreViewSet(CustomMixin):
+class GenreViewSet(CreateDestroyListMixin):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
     permission_classes = (IsAdminOrReadOnly,)
