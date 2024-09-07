@@ -15,32 +15,34 @@ class CustomUser(AbstractUser):
         verbose_name='Имя пользователя',
         max_length=USERFIELDS_LENGTH,
         unique=True,
-        validators=[RegexValidator(REGEX),]
+        validators=[
+            RegexValidator(REGEX),
+        ],
     )
     email = models.EmailField(
         verbose_name='Email',
         max_length=EMAIL_LENGTH,
-        unique=True
+        unique=True,
     )
     first_name = models.CharField(
         verbose_name='Имя',
         max_length=USERFIELDS_LENGTH,
-        blank=True
+        blank=True,
     )
     last_name = models.CharField(
         verbose_name='Фамилия',
         max_length=USERFIELDS_LENGTH,
-        blank=True
+        blank=True,
     )
     bio = models.TextField(
         verbose_name='Биография',
-        blank=True
+        blank=True,
     )
     role = models.CharField(
         verbose_name='Роль',
         max_length=Role.max_length(),
         choices=Role.selection(),
-        default=Role.user.name
+        default=Role.user.name,
     )
 
     class Meta:
